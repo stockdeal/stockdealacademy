@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Deal | Your Stock Trading Companion</title>
+    <meta name="description" content="Stock Deal - Your Stock Trading Companion" />
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" type="image/png" href="/logo/stock-deal.png" />
+    <link rel="apple-touch-icon" href="/logo/stock-deal.png" />
+
+    <!-- ✅ Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Google Fonts (Geist Sans + Geist Mono) -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Geist+Mono&display=swap"
+        rel="stylesheet">
+
+    <!-- ✅ Lucide React alternative (plain JS version) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --font-geist-sans: 'Geist', sans-serif;
+            --font-geist-mono: 'Geist Mono', monospace;
+        }
+
+        body {
+            font-family: var(--font-geist-sans);
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-gray-100">
+
+    <!-- ✅ Wrapper (simulating your React <Wrapper> component) -->
+    <nav class="sticky top-0 z-50 w-full backdrop-blur bg-[#6b9bf3] text-slate-50 border-b">
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+            <!-- 🔹 Logo -->
+            <a href="/" class="inline-flex items-center gap-2">
+                <img src="logo/stock-deal.png" alt="Stock Deal Academy Logo" class="h-9 w-auto object-contain">
+                <span class="text-lg font-semibold">StockDealAcademy</span>
+            </a>
+
+            <!-- 🔹 Desktop Nav -->
+            <div class="hidden md:flex gap-6 justify-center flex-1">
+                <div class="relative group">
+                    <a href="/" class="text-base font-medium hover:text-blue-600 transition-colors">Home</a>
+                </div>
+                <div class="relative group">
+                    <a href="/about-us" class="text-base font-medium hover:text-blue-600 transition-colors">About Us</a>
+                </div>
+                <div class="relative group">
+                    <a href="/contact-us" class="text-base font-medium hover:text-blue-600 transition-colors">Contact
+                        Us</a>
+                </div>
+
+                <!-- Dropdown -->
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-base font-medium hover:text-blue-600 transition-colors">
+                        Offerings <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
+                    <div
+                        class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                        <a href="/courses" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Courses</a>
+                        <a href="/offering" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Offering</a>
+                        <a href="/career-counseling"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Career Counseling</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🔹 Desktop Auth -->
+            <div id="auth-desktop" class="hidden md:flex gap-2 items-center"></div>
+
+            <!-- 🔹 Mobile Hamburger -->
+            <button id="menu-toggle"
+                class="cursor-pointer p-2 rounded-md hover:bg-gray-200 transition-colors md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- 🔹 Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+            <div class="flex flex-col gap-1">
+                <a href="/" class="block w-full rounded-md px-4 py-2 text-base font-medium hover:bg-gray-100">Home</a>
+                <a href="/about-us"
+                    class="block w-full rounded-md px-4 py-2 text-base font-medium hover:bg-gray-100">About Us</a>
+                <a href="/contact-us"
+                    class="block w-full rounded-md px-4 py-2 text-base font-medium hover:bg-gray-100">Contact Us</a>
+
+                <!-- Offerings dropdown -->
+                <div class="flex flex-col">
+                    <button id="offerings-btn"
+                        class="flex justify-between items-center px-4 py-2 text-base font-medium hover:bg-gray-100 rounded-md">
+                        Offerings
+                        <i id="offerings-icon" data-lucide="chevron-down" class="w-5 h-5 transition-transform"></i>
+                    </button>
+                    <div id="offerings-menu" class="hidden pl-6 flex flex-col">
+                        <a href="/courses" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Courses</a>
+                        <a href="/offering" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Offering</a>
+                        <a href="/career-counseling" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Career
+                            Counseling</a>
+                    </div>
+                </div>
+
+                <!-- Auth Buttons Mobile -->
+                <div id="auth-mobile" class="flex flex-col gap-2 mt-4"></div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="flex flex-col items-center justify-center min-h-screen px-4 bg-gray-50">
+        <div class="text-center">
+            <h1 class="text-3xl sm:text-4xl font-semibold text-orange-600">
+                👋 Welcome to StockDealAcademy!
+            </h1>
+            <p class="mt-2 text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
+                Discover the best stock insights, live market trends, and interactive
+                online classes — all in one place.
+            </p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="w-full max-w-[400px] mt-8 p-6 bg-white shadow-md rounded-lg">
+            <form id="registerForm" class="space-y-4">
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user absolute left-3 top-3 text-gray-400 w-5 h-5" aria-hidden="true">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <input type="text" id="name" placeholder="Full Name" required
+                        class="pl-10 w-full px-4 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                </div>
+
+                <div class="relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user absolute left-3 top-3 text-gray-400 w-5 h-5" aria-hidden="true">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg> <input type="email" id="email" placeholder="Email Address" required
+                        class="pl-10 w-full px-4 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                </div>
+
+                <div class="relative">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                        class="absolute left-3 top-3 text-gray-400" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z">
+                        </path>
+                    </svg> <input type="text" id="mobile" placeholder="Mobile Number" required maxlength="10"
+                        class="pl-10 w-full px-4 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                </div>
+
+                <div class="relative">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
+                        class="absolute left-3 top-3 text-gray-400" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z">
+                        </path>
+                    </svg>
+                    <input type="password" id="password" placeholder="Password" required
+                        class="pl-10 pr-10 w-full px-4 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                    <button type="button" id="togglePassword" class="absolute right-3 top-3 text-gray-500">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 576 512"
+                            height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 sm:py-3 rounded-lg text-sm sm:text-base">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+
+        <!-- OTP Form -->
+        <div id="otpForm" class="hidden w-full max-w-[400px] mt-8 p-6 bg-white shadow-md rounded-lg">
+            <form id="verifyForm" class="space-y-4">
+                <p class="text-gray-600 text-sm text-center">
+                    Enter OTP sent to your email
+                </p>
+                <div class="relative">
+                    <input type="text" id="otp" placeholder="Enter OTP"
+                        class="w-full px-4 py-2 border border-orange-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                </div>
+                <button type="submit"
+                    class="w-full bg-orange-600 hover:bg-orange-700 text-white py-2 sm:py-3 rounded-lg text-sm sm:text-base">
+                    Verify OTP
+                </button>
+            </form>
+        </div>
+
+        <!-- Message -->
+        <p id="message" class="text-center text-sm mt-4"></p>
+    </div>
+
+
+    <footer class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white">
+
+        <!-- Main Footer Content -->
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="mb-6">
+                        <h3
+                            class="text-2xl font-bold bg-gradient-to-r from-orange-400 to-blue-400 bg-clip-text text-transparent mb-4">
+                            Stock Deal Academy
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            Empowering traders worldwide with cutting-edge education, proven strategies,
+                            and unwavering support to master the art of stock market investing.
+                        </p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-300 hover:text-orange-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-mail w-5 h-5 mr-3 text-orange-400"
+                                aria-hidden="true">
+                                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            </svg>
+                            <span>info@stockdealacademy.com</span>
+                        </div>
+                        <div class="flex items-center text-gray-300 hover:text-orange-400 transition-colors">
+                            <svg class="w-5 h-5 mr-3 text-orange-400" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.12A19.5 19.5 0 0 1 3.2 10.81a19.86 19.86 0 0 1-3.12-8.63A2 2 0 0 1 2.08 0h3a2 2 0 0 1 2 1.72 12.44 12.44 0 0 0 .68 2.81 2 2 0 0 1-.45 2.11L6.09 8.09a16 16 0 0 0 7.9 7.9l1.45-1.13a2 2 0 0 1 2.11-.45 12.44 12.44 0 0 0 2.81.68A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                            <span>+91 7447882274</span>
+                        </div>
+                        <div class="flex items-center text-gray-300 hover:text-orange-400 transition-colors">
+                            <svg class="w-5 h-5 mr-3 text-orange-400" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <span>Nagpur, Maharashtra, India</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-white">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/about-us"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">About
+                                Us
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/courses"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Courses
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/testimonials"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Success
+                                Stories
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/blog"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Blog
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/contact-us"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Contact
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-white">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/privacy"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Privacy
+                                Policy
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/terms-and-conditions"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Terms
+                                and Conditions
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                        <li><a href="/refund-policy"
+                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Refund
+                                Policy
+                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <path d="M7 17L17 7M7 7h10v10" />
+                                </svg></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Social + Copyright -->
+            <div class="border-t border-white/20 pt-8 mt-12">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <!-- Social -->
+                    <div class="flex items-center space-x-6 mb-4 md:mb-0">
+                        <span class="text-gray-300 font-medium">Follow Us:</span>
+                        <div class="flex space-x-4">
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-pink-400 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-white/10">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                                </svg>
+                            </a>
+                            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"
+                                class="text-gray-300 hover:text-red-400 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-white/10">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-youtube w-5 h-5" aria-hidden="true">
+                                    <path
+                                        d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17">
+                                    </path>
+                                    <path d="m10 15 5-3-5-3z"></path>
+                                </svg>
+                            </a>
+                            <a href="mailto:info@stockdealacademy.com"
+                                class="text-gray-300 hover:text-blue-400 transition-all duration-300 hover:scale-110 p-2 rounded-lg hover:bg-white/10">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="lucide lucide-mail w-5 h-5" aria-hidden="true">
+                                    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                                    <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Copyright -->
+                    <div class="text-center md:text-right">
+                        <p class="text-gray-300 text-sm">
+                            &copy; 2025 Stock Deal Academy. All rights reserved.
+                        </p>
+                        <p class="text-gray-400 text-xs mt-1">
+                            Made with ❤️ for learners and traders
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-gray-900 py-3 border-t border-gray-700">
+            <div class="max-w-7xl mx-auto px-4">
+                <p class="text-xs text-gray-400 text-center">
+                    <span class="font-semibold text-yellow-400">Disclaimer:</span>
+                    Investments in the securities market are subject to market risks, read all the related documents
+                    carefully before investing.
+                    Past performance does not guarantee future results. Please trade responsibly.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+        const otpForm = document.getElementById("otpForm");
+        const message = document.getElementById("message");
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("password");
+
+        // Toggle password visibility
+        togglePassword.addEventListener("click", () => {
+            const type =
+                passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            togglePassword.innerHTML =
+                type === "password"
+                    ? '<i class="fa-solid fa-eye"></i>'
+                    : '<i class="fa-solid fa-eye-slash"></i>';
+        });
+
+        // Signup validation
+        document.getElementById("registerForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            message.textContent = "";
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const mobile = document.getElementById("mobile").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                message.textContent = "⚠️ Please enter a valid email.";
+                message.className = "text-red-500 mt-4 text-center text-sm";
+                return;
+            }
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                message.textContent = "⚠️ Mobile number must be 10 digits.";
+                message.className = "text-red-500 mt-4 text-center text-sm";
+                return;
+            }
+            if (password.length < 6) {
+                message.textContent = "⚠️ Password must be at least 6 characters.";
+                message.className = "text-red-500 mt-4 text-center text-sm";
+                return;
+            }
+
+            // Simulate registration
+            message.textContent = "✅ Registration successful! OTP sent to your email.";
+            message.className = "text-green-600 mt-4 text-center text-sm";
+            signupForm.classList.add("hidden");
+            otpForm.classList.remove("hidden");
+        });
+
+        // OTP verification
+        document.getElementById("verifyForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const otp = document.getElementById("otp").value.trim();
+            if (!otp) {
+                message.textContent = "⚠️ Please enter OTP.";
+                message.className = "text-red-500 mt-4 text-center text-sm";
+                return;
+            }
+
+            // Simulate OTP verification
+            message.textContent = "✅ OTP verified! Account activated.";
+            message.className = "text-green-600 mt-4 text-center text-sm";
+            otpForm.classList.add("hidden");
+        });
+    </script>
+
+
+    <script>
+        lucide.createIcons();
+
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const offeringsBtn = document.getElementById("offerings-btn");
+        const offeringsMenu = document.getElementById("offerings-menu");
+        const offeringsIcon = document.getElementById("offerings-icon");
+
+        let isOpen = false;
+        let offeringsOpen = false;
+
+        // Toggle mobile menu
+        menuToggle.addEventListener("click", () => {
+            isOpen = !isOpen;
+            mobileMenu.classList.toggle("hidden", !isOpen);
+            menuToggle.innerHTML = isOpen ? '<i data-lucide="x" class="w-6 h-6"></i>' : '<i data-lucide="menu" class="w-6 h-6"></i>';
+            lucide.createIcons();
+        });
+
+        // Toggle offerings submenu (mobile)
+        offeringsBtn.addEventListener("click", () => {
+            offeringsOpen = !offeringsOpen;
+            offeringsMenu.classList.toggle("hidden", !offeringsOpen);
+            offeringsIcon.classList.toggle("rotate-180", offeringsOpen);
+        });
+
+        // ✅ Auth management
+        const authDesktop = document.getElementById("auth-desktop");
+        const authMobile = document.getElementById("auth-mobile");
+
+        const renderAuth = () => {
+            const isAuth = localStorage.getItem("isAuth") === "true";
+            if (isAuth) {
+                authDesktop.innerHTML = `
+          <img src="/images/user.png" alt="Profile" class="h-8 w-8 rounded-full object-cover">
+          <button id="logout-btn" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md transition-colors">Logout</button>
+        `;
+                authMobile.innerHTML = `
+          <button id="logout-btn-mobile" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md transition-colors">Logout</button>
+        `;
+            } else {
+                authDesktop.innerHTML = `
+          <a href="/login" class="border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-100">Login</a>
+          <a href="/register" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md">Sign Up</a>
+        `;
+                authMobile.innerHTML = `
+          <a href="/login" class="border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-100 text-center">Login</a>
+          <a href="/register" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md text-center">Sign Up</a>
+        `;
+            }
+
+            // Add logout handlers
+            const logoutBtn = document.getElementById("logout-btn");
+            const logoutBtnMobile = document.getElementById("logout-btn-mobile");
+            [logoutBtn, logoutBtnMobile].forEach(btn => {
+                if (btn) {
+                    btn.addEventListener("click", () => {
+                        localStorage.removeItem("isAuth");
+                        window.location.href = "/";
+                    });
+                }
+            });
+        };
+
+        renderAuth();
+    </script>
+
+</body>
+
+</html>
