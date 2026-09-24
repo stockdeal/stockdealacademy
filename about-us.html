@@ -20,6 +20,7 @@
 
     <!-- ✅ Lucide React alternative (plain JS version) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/auth.js"></script>
 
     <style>
         :root {
@@ -65,8 +66,8 @@
                     <div
                         class="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                         <a href="courses.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Courses</a>
-                        <a href="offering.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Offering</a>
-                        <a href="career-counseling.html"
+                        <a href="soon.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Offering</a>
+                        <a href="soon.html"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Career Counseling</a>
                     </div>
                 </div>
@@ -100,8 +101,8 @@
                     </button>
                     <div id="offerings-menu" class="hidden pl-6 flex flex-col">
                         <a href="courses.html" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Courses</a>
-                        <a href="offering.html" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Offering</a>
-                        <a href="career-counseling.html" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Career
+                        <a href="soon.html" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Offering</a>
+                        <a href="soon.html" class="block px-4 py-2 text-sm hover:bg-gray-100 rounded-md">Career
                             Counseling</a>
                     </div>
                 </div>
@@ -484,7 +485,7 @@
                                     stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M7 17L17 7M7 7h10v10" />
                                 </svg></a></li>
-                        <li><a href="testimonials.html"
+                        <li><a href="soon.html"
                                 class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Success
                                 Stories
                                 <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
@@ -492,7 +493,7 @@
                                     stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M7 17L17 7M7 7h10v10" />
                                 </svg></a></li>
-                        <li><a href="blog.html"
+                        <li><a href="soon.html"
                                 class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Blog
                                 <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -513,7 +514,7 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-6 text-white">Legal</h4>
                     <ul class="space-y-3">
-                        <li><a href="privacy.html"
+                        <li><a href="soon.html"
                                 class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Privacy
                                 Policy
                                 <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
@@ -521,7 +522,7 @@
                                     stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M7 17L17 7M7 7h10v10" />
                                 </svg></a></li>
-                        <li><a href="/terms-and-conditions"
+                        <li><a href="soon.html"
                                 class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Terms
                                 and Conditions
                                 <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
@@ -529,7 +530,7 @@
                                     stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M7 17L17 7M7 7h10v10" />
                                 </svg></a></li>
-                        <li><a href="/refund-policy"
+                        <li><a href="soon.html"
                                 class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Refund
                                 Policy
                                 <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
@@ -637,45 +638,8 @@
             offeringsIcon.classList.toggle("rotate-180", offeringsOpen);
         });
 
-        // ✅ Auth management
-        const authDesktop = document.getElementById("auth-desktop");
-        const authMobile = document.getElementById("auth-mobile");
-
-        const renderAuth = () => {
-            const isAuth = localStorage.getItem("isAuth") === "true";
-            if (isAuth) {
-                authDesktop.innerHTML = `
-          <img src="/images/user.png" alt="Profile" class="h-8 w-8 rounded-full object-cover">
-          <button id="logout-btn" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md transition-colors">Logout</button>
-        `;
-                authMobile.innerHTML = `
-          <button id="logout-btn-mobile" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md transition-colors">Logout</button>
-        `;
-            } else {
-                authDesktop.innerHTML = `
-          <a href="/login" class="border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-100">Login</a>
-          <a href="/register" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md">Sign Up</a>
-        `;
-                authMobile.innerHTML = `
-          <a href="/login" class="border border-gray-300 px-3 py-1.5 rounded-md hover:bg-gray-100 text-center">Login</a>
-          <a href="/register" class="bg-orange-500 hover:bg-orange-600 text-white px-3 py-1.5 rounded-md text-center">Sign Up</a>
-        `;
-            }
-
-            // Add logout handlers
-            const logoutBtn = document.getElementById("logout-btn");
-            const logoutBtnMobile = document.getElementById("logout-btn-mobile");
-            [logoutBtn, logoutBtnMobile].forEach(btn => {
-                if (btn) {
-                    btn.addEventListener("click", () => {
-                        localStorage.removeItem("isAuth");
-                        window.location.href = "/";
-                    });
-                }
-            });
-        };
-
-        renderAuth();
+        // ✅ Auth management (session-based, see assets/js/auth.js)
+        initAuthUI();
     </script>
 
 </body>
