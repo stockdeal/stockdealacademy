@@ -4,12 +4,41 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stock Deal | Your Stock Trading Companion</title>
-    <meta name="description" content="Stock Deal - Your Stock Trading Companion" />
+    <title>Share Market Course in Nagpur for Beginners | Stock Deal Academy</title>
+    <meta name="description" content="Learn share market and trading from scratch at Stock Deal Academy, Nagpur. NISM-certified trainers, live market sessions and small batches. Beginner friendly." />
+    <link rel="canonical" href="https://stockdealacademy.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stock Deal Academy" />
+    <meta property="og:title" content="Share Market Course in Nagpur for Beginners | Stock Deal Academy" />
+    <meta property="og:description" content="Learn share market and trading from scratch at Stock Deal Academy, Nagpur. NISM-certified trainers, live market sessions and small batches. Beginner friendly." />
+    <meta property="og:url" content="https://stockdealacademy.com/" />
+    <meta property="og:image" content="https://stockdealacademy.com/logo/stock-deal-192.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Share Market Course in Nagpur for Beginners | Stock Deal Academy" />
+    <meta name="twitter:description" content="Learn share market and trading from scratch at Stock Deal Academy, Nagpur. NISM-certified trainers, live market sessions and small batches. Beginner friendly." />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Stock Deal Academy",
+      "alternateName": "SDA",
+      "url": "https://stockdealacademy.com/",
+      "logo": "https://stockdealacademy.com/logo/stock-deal-192.png",
+      "description": "Learn share market and trading from scratch at Stock Deal Academy, Nagpur. NISM-certified trainers, live market sessions and small batches. Beginner friendly.",
+      "email": "info@stockdealacademy.com",
+      "telephone": "+91-7447882274",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Nagpur",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
 
     <!-- ✅ Favicon -->
-    <link rel="icon" type="image/png" href="/logo/stock-deal.png" />
-    <link rel="apple-touch-icon" href="/logo/stock-deal.png" />
+    <link rel="icon" type="image/png" href="/logo/stock-deal-192.png" />
+    <link rel="apple-touch-icon" href="/logo/stock-deal-192.png" />
 
     <!-- ✅ Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +49,7 @@
 
     <!-- ✅ Lucide React alternative (plain JS version) -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/leads.js"></script>
     <script src="assets/js/ui.js"></script>
 
     <style>
@@ -72,7 +101,7 @@
         <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
             <!-- 🔹 Logo -->
             <a href="index.html" class="inline-flex items-center gap-2">
-                <img src="logo/stock-deal.png" alt="Stock Deal Academy Logo" class="h-9 w-auto object-contain">
+                <img src="logo/stock-deal-128.png" width="36" height="36" alt="Stock Deal Academy Logo" class="h-9 w-auto object-contain">
                 <span class="text-lg font-semibold">StockDealAcademy</span>
             </a>
 
@@ -105,7 +134,9 @@
             </div>
 
             <!-- 🔹 Desktop Auth -->
-            <div id="auth-desktop" class="hidden md:flex gap-2 items-center"></div>
+            <div class="hidden md:flex gap-2 items-center">
+                <a href="register.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-1.5 rounded-md transition-colors font-medium">Register Now</a>
+            </div>
 
             <!-- 🔹 Mobile Hamburger -->
             <button id="menu-toggle"
@@ -139,7 +170,9 @@
                 </div>
 
                 <!-- Auth Buttons Mobile -->
-                <div id="auth-mobile" class="flex flex-col gap-2 mt-4"></div>
+                <div class="flex flex-col gap-2 mt-4">
+                    <a href="register.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-1.5 rounded-md transition-colors font-medium text-center">Register Now</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -165,6 +198,7 @@
                         Join for Free
                     </button>
                 </div>
+                <p class="text-xs text-white/80">By joining, you agree to be contacted by Stock Deal Academy.</p>
             </div>
 
             <!-- RIGHT CONTENT -->
@@ -177,7 +211,7 @@
                 <!-- Student Image -->
                 <div
                     class="relative w-full max-w-sm sm:max-w-md md:max-w-lg aspect-[4/5] rounded-3xl overflow-hidden mx-auto">
-                    <img src="images/girl.png" alt="Student" class="w-full h-full object-cover animate-float" />
+                    <img src="images/girl.webp" alt="Student" class="w-full h-full object-cover animate-float" />
                 </div>
             </div>
         </div>
@@ -198,18 +232,18 @@
 
 
             <section class="text-center pt-[10rem] pb-[7rem] flex flex-col items-center justify-center">
-                <h1 class="text-4xl md:text-4xl font-semibold mb-6 leading-tight max-w-4xl">
+                <h2 class="text-4xl md:text-4xl font-semibold mb-6 leading-tight max-w-4xl">
                     Power Up Your Learning in
                     <span class="relative text-orange-500/95 custom-underline">Trading and Investing</span>
                     with <span class="text-blue-700">Stock Deal Academy (SDA)</span>
-                </h1>
+                </h2>
 
                 <p class="text-lg md:text-xl text-gray-700 max-w-2xl mb-10">
                     Experience tailored guidance designed to cater to unique learning needs.
                     We ensure every student receives the individual attention they deserve.
                 </p>
 
-                <button onclick="window.location.href='courses.html'"
+                <button type="button" data-open-popup
                     class="inline-block bg-orange-500 hover:bg-orange-600 text-white text-base sm:text-lg font-semibold py-3 px-8 rounded-full shadow-md transition-transform duration-200 hover:scale-105">
                     🚀 Join our upcoming batch
                 </button>
@@ -281,7 +315,7 @@
                         <!-- Member 2 -->
                         <div
                             class="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-md hover:shadow-lg transition-all">
-                            <img src="trainer/prajwal.jpg" alt="Prajwal Shirpurkar"
+                            <img src="trainer/prajwal-400.jpg" alt="Prajwal Shirpurkar"
                                 class="w-24 h-24 rounded-full mx-auto object-cover mb-4 shadow" />
                             <h3 class="text-xl font-semibold text-gray-800">Prajwal Shirpurkar</h3>
                             <p class="text-sm text-orange-600 font-medium mb-2">Lead Trainer</p>
@@ -335,7 +369,7 @@
                                 <i data-lucide="graduation-cap" class="w-10 h-10 sm:w-14 sm:h-14 text-white"></i>
                             </div>
 
-                            <h1 class="text-2xl sm:text-3xl font-bold mb-2">Stock Deal Academy Scholarship Program</h1>
+                            <h2 class="text-2xl sm:text-3xl font-bold mb-2">Stock Deal Academy Scholarship Program</h2>
                             <p class="text-base sm:text-xl font-semibold text-orange-100 mb-4">Worth Upto 1 Crore</p>
 
                             <div class="space-y-2 text-sm sm:text-base text-white/90">
@@ -373,6 +407,15 @@
                                 <input type="email" name="email" placeholder="Email Address *"
                                     class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all" />
 
+                                <div class="hidden" aria-hidden="true">
+                                    <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+                                </div>
+
+                                <label class="flex items-start space-x-2 text-xs text-gray-600 cursor-pointer">
+                                    <input type="checkbox" name="consent" class="mt-0.5 accent-orange-600 w-4 h-4">
+                                    <span>I agree to be contacted by Stock Deal Academy by phone, WhatsApp or email.</span>
+                                </label>
+
                                 <button type="button" id="apply-btn"
                                     class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-4 rounded-lg text-base font-bold transition-transform transform hover:scale-105 shadow-lg hover:shadow-xl">
                                     Register
@@ -389,16 +432,16 @@
             <!-- ✅ Become Section -->
             <section class="relative text-gray-900 py-14 px-6 text-center overflow-hidden">
                 <div class="relative z-10 max-w-4xl mx-auto">
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-normal leading-tight mb-6">
+                    <h2 class="text-4xl sm:text-5xl md:text-6xl font-normal leading-tight mb-6">
                         Become a <span class="text-orange-600">Consistent Trader</span>
-                    </h1>
+                    </h2>
 
                     <p class="text-lg sm:text-xl text-gray-700 mb-8">
                         📈 Join 500+ successful learners who have unlocked their potential through our
                         rules-based trading and investment system, guided by expert mentorship.
                     </p>
 
-                    <a href="#training"
+                    <a href="#" data-open-popup
                         class="inline-block bg-orange-500 hover:bg-orange-600 text-white text-base sm:text-lg font-semibold py-3 px-8 rounded-full shadow-md transition-transform duration-200 hover:scale-105">
                         🚀 Join our upcoming batch
                     </a>
@@ -704,14 +747,6 @@
                                     stroke-linejoin="round" viewBox="0 0 24 24">
                                     <path d="M7 17L17 7M7 7h10v10" />
                                 </svg></a></li>
-                        <li><a href="soon.html"
-                                class="text-gray-300 hover:text-orange-400 transition-colors duration-300 flex items-center group">Refund
-                                Policy
-                                <svg class="w-3 h-3 ml-2 opacity-0 group-hover:opacity-100" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" viewBox="0 0 24 24">
-                                    <path d="M7 17L17 7M7 7h10v10" />
-                                </svg></a></li>
                     </ul>
                 </div>
             </div>
@@ -881,8 +916,22 @@
         const applyBtn = document.getElementById("apply-btn");
         const form = document.getElementById("scholarship-form");
 
-        // 🕒 Auto open after 3 seconds
-        setTimeout(() => popup.classList.remove("hidden"), 3000);
+        // Opens only when a visitor asks for it (no auto-popup: Google penalizes intrusive interstitials)
+        function openScholarshipPopup() {
+            popup.classList.remove("hidden");
+        }
+        document.querySelectorAll("[data-open-popup]").forEach((el) =>
+            el.addEventListener("click", (e) => {
+                e.preventDefault();
+                openScholarshipPopup();
+            })
+        );
+        popup.addEventListener("click", (e) => {
+            if (e.target === popup) popup.classList.add("hidden");
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") popup.classList.add("hidden");
+        });
 
         // ❌ Close popup
         closeBtn.addEventListener("click", () => popup.classList.add("hidden"));
@@ -904,10 +953,18 @@
             const name = form.name.value.trim();
             const number = form.number.value.trim();
             const email = form.email.value.trim();
-            const whatsapp = whatsappInput.value.trim();
+            const whatsapp = sameAsContact.checked ? number : whatsappInput.value.trim();
 
             if (!name || !number || !email) {
                 showAlert("Please fill all required fields.", { type: "error", title: "Missing details" });
+                return;
+            }
+            if (!/^[6-9][0-9]{9}$/.test(number)) {
+                showAlert("Please enter a valid 10-digit mobile number.", { type: "error", title: "Invalid number" });
+                return;
+            }
+            if (!form.elements.consent.checked) {
+                showAlert("Please tick the box to agree to be contacted.", { type: "error", title: "One more thing" });
                 return;
             }
 
@@ -918,6 +975,8 @@
                 phone: number,
                 whatsapp: whatsapp || undefined,
                 email,
+                consent: true,
+                website: form.elements.website.value,
             });
             applyBtn.disabled = false;
 
@@ -929,7 +988,7 @@
             form.reset();
             whatsappInput.disabled = false;
             popup.classList.add("hidden");
-            showAlert("Your scholarship application has been submitted. We'll contact you within 24 hours.", {
+            showAlert("Your scholarship application has been submitted. Our team will contact you shortly.", {
                 type: "success",
                 title: "Congratulations!",
             });
@@ -1001,8 +1060,6 @@
             offeringsIcon.classList.toggle("rotate-180", offeringsOpen);
         });
 
-        // ✅ Auth management (session-based, see assets/js/auth.js)
-        initAuthUI();
     </script>
 
 </body>
@@ -1028,7 +1085,7 @@
     async function handleJoinFree() {
         const input = document.getElementById("phoneInput");
         const phone = input.value.trim();
-        if (!/^[0-9]{10}$/.test(phone)) {
+        if (!/^[6-9][0-9]{9}$/.test(phone)) {
             showAlert("Please enter a valid 10-digit mobile number.", { type: "error", title: "Invalid number" });
             return;
         }
