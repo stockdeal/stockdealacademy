@@ -402,10 +402,16 @@
         const submitBtn = document.getElementById("submitBtn");
         const courseField = document.getElementById("courseField");
 
-        // Enroll Now on a course page links here as register.html?course=<name>,
-        // so the visitor doesn't have to retype which course they want.
-        function prefillCourseFromUrl() {
-            const course = new URLSearchParams(location.search).get("course");
+        // Enroll Now on a course page stashes the course name in sessionStorage before
+        // navigating here (not a URL query string, since some static-file servers
+        // redirect .html URLs and drop query strings in the process). Read once and
+        // clear it, so a later, unrelated visit to this page doesn't show a stale course.
+        function prefillCourse() {
+            let course = "";
+            try {
+                course = sessionStorage.getItem("sda_enroll_course") || "";
+                sessionStorage.removeItem("sda_enroll_course");
+            } catch (e) {}
             if (course) {
                 form.elements.course.value = course.slice(0, 150);
                 courseField.classList.remove("hidden");
@@ -414,7 +420,7 @@
                 form.elements.course.value = "";
             }
         }
-        prefillCourseFromUrl();
+        prefillCourse();
 
         function showError(text) {
             message.textContent = "⚠️ " + text;
@@ -449,7 +455,7 @@
             if (!result.ok) return showAlert(result.error, { type: "error" });
 
             form.reset();
-            prefillCourseFromUrl();
+            prefillCourse();
             showAlert("Our team will contact you shortly.", { type: "success", title: "Thanks for registering!" });
         });
     </script>
