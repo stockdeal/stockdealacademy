@@ -6,9 +6,12 @@
 
 var NOTIFY_EMAIL = "stockdeal20@gmail.com"; // optional: e.g. "sales@stockdealacademy.com" to get an email per lead. Leave "" for none.
 var SHEET_NAME = "Leads";
+// "Course" is appended at the end (not inserted earlier) so the Status dropdown
+// (column M) and the phone/WhatsApp text format (columns D:E) keep pointing at
+// the right columns on sheets created before this field existed.
 var HEADERS = [
   "Timestamp", "Source", "Name", "Phone", "WhatsApp", "Email", "City",
-  "Interested In", "Best Time", "Message", "Consent", "Page", "Status", "Notes"
+  "Interested In", "Best Time", "Message", "Consent", "Page", "Status", "Notes", "Course"
 ];
 var SOURCES = ["SCHOLARSHIP", "JOIN_FREE", "CONTACT", "REGISTER", "COUNSELOR"];
 // These sources are a single phone-number ask with a notice line instead of a
@@ -40,7 +43,7 @@ function doPost(e) {
         Utilities.formatDate(new Date(), "Asia/Kolkata", "yyyy-MM-dd HH:mm:ss"),
         lead.source, safe_(lead.name), lead.phone, lead.whatsapp, safe_(lead.email), safe_(lead.city),
         safe_(lead.interest), safe_(lead.bestTime), safe_(lead.message), lead.consent, safe_(lead.page),
-        "New", ""
+        "New", "", safe_(lead.course)
       ]);
     } finally {
       lock.releaseLock();
@@ -68,6 +71,7 @@ function validate_(d) {
     bestTime: clean_(d.bestTime, 40),
     message: cleanMultiline_(d.message, 1500),
     page: clean_(d.page, 100),
+    course: clean_(d.course, 150),
     consent: PHONE_ONLY_SOURCES.indexOf(source) >= 0 ? "Notice shown" : (d.consent === true || d.consent === "yes" ? "Yes" : "")
   };
   var isPhoneOnly = PHONE_ONLY_SOURCES.indexOf(source) >= 0;
