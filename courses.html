@@ -30,6 +30,8 @@
 
     <!-- ✅ Lucide React alternative (plain JS version) -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/leads.js"></script>
+    <script src="assets/js/ui.js"></script>
 
     <style>
         :root {
@@ -310,15 +312,46 @@
 
                         <!-- Buttons -->
                         <div class="mt-5 flex flex-col sm:flex-row gap-3">
-                            <a href="#counselling"
+                            <button type="button" id="open-counselor-popup"
                                 class="flex-1 text-center border border-gray-300 rounded-md py-3 font-medium hover:bg-gray-100 transition">
                                 Connect with Financial Counselor
-                            </a>
-                            <a href="#enroll"
+                            </button>
+                            <a href="register.html"
                                 class="flex-1 text-center bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-md transition-colors">
                                 Enroll Now
                             </a>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Connect with Financial Counselor popup -->
+                <div id="counselor-popup"
+                    class="hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex justify-center items-center p-4">
+                    <div class="relative bg-white w-full max-w-sm rounded-xl shadow-2xl p-6">
+                        <button type="button" id="counselor-popup-close" aria-label="Close"
+                            class="absolute top-3 right-3 rounded-full p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                        </button>
+
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">Talk to a Financial Counselor</h3>
+                        <p class="text-sm text-gray-600 mb-4">Share your number and our counselor will call you to guide you on this course.</p>
+
+                        <form id="counselor-form" class="space-y-3">
+                            <input type="text" name="name" placeholder="Full Name"
+                                class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+                            <input type="tel" name="phone" placeholder="Mobile Number *" maxlength="10" required
+                                class="w-full border-2 border-gray-200 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-orange-500 focus:outline-none" />
+
+                            <div class="hidden" aria-hidden="true">
+                                <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+                            </div>
+
+                            <button type="submit" id="counselor-submit-btn"
+                                class="w-full bg-orange-500 hover:bg-orange-600 disabled:opacity-60 text-white font-semibold py-3 rounded-md transition-colors">
+                                Request a Call Back
+                            </button>
+                            <p class="text-xs text-gray-400 text-center">By submitting, you agree to be contacted by Stock Deal Academy.</p>
+                        </form>
                     </div>
                 </div>
 
@@ -1066,6 +1099,51 @@
             offeringsOpen = !offeringsOpen;
             offeringsMenu.classList.toggle("hidden", !offeringsOpen);
             offeringsIcon.classList.toggle("rotate-180", offeringsOpen);
+        });
+
+        // Connect with Financial Counselor popup
+        const counselorPopup = document.getElementById("counselor-popup");
+        const counselorForm = document.getElementById("counselor-form");
+        const counselorSubmitBtn = document.getElementById("counselor-submit-btn");
+
+        document.getElementById("open-counselor-popup").addEventListener("click", () => {
+            counselorPopup.classList.remove("hidden");
+        });
+        document.getElementById("counselor-popup-close").addEventListener("click", () => {
+            counselorPopup.classList.add("hidden");
+        });
+        counselorPopup.addEventListener("click", (e) => {
+            if (e.target === counselorPopup) counselorPopup.classList.add("hidden");
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") counselorPopup.classList.add("hidden");
+        });
+
+        counselorForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const phone = counselorForm.elements.phone.value.trim();
+            if (!/^[6-9][0-9]{9}$/.test(phone)) {
+                showAlert("Please enter a valid 10-digit mobile number.", { type: "error", title: "Invalid number" });
+                return;
+            }
+
+            counselorSubmitBtn.disabled = true;
+            const result = await submitLead({
+                source: "COUNSELOR",
+                name: counselorForm.elements.name.value.trim() || undefined,
+                phone,
+                website: counselorForm.elements.website.value,
+            });
+            counselorSubmitBtn.disabled = false;
+
+            if (!result.ok) {
+                showAlert(result.error, { type: "error" });
+                return;
+            }
+
+            counselorForm.reset();
+            counselorPopup.classList.add("hidden");
+            showAlert("A financial counselor will call you shortly.", { type: "success", title: "Request received!" });
         });
 
     </script>

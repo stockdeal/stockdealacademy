@@ -10,7 +10,10 @@ var HEADERS = [
   "Timestamp", "Source", "Name", "Phone", "WhatsApp", "Email", "City",
   "Interested In", "Best Time", "Message", "Consent", "Page", "Status", "Notes"
 ];
-var SOURCES = ["SCHOLARSHIP", "JOIN_FREE", "CONTACT", "REGISTER"];
+var SOURCES = ["SCHOLARSHIP", "JOIN_FREE", "CONTACT", "REGISTER", "COUNSELOR"];
+// These sources are a single phone-number ask with a notice line instead of a
+// separate name field + consent tick box (kept low-friction on purpose).
+var PHONE_ONLY_SOURCES = ["JOIN_FREE", "COUNSELOR"];
 var DUPLICATE_WINDOW_MS = 10 * 60 * 1000;
 var STATUS_OPTIONS = ["New", "Called", "Interested", "Follow up", "Enrolled", "Not interested", "Wrong number"];
 
@@ -65,16 +68,17 @@ function validate_(d) {
     bestTime: clean_(d.bestTime, 40),
     message: cleanMultiline_(d.message, 1500),
     page: clean_(d.page, 100),
-    consent: source === "JOIN_FREE" ? "Notice shown" : (d.consent === true || d.consent === "yes" ? "Yes" : "")
+    consent: PHONE_ONLY_SOURCES.indexOf(source) >= 0 ? "Notice shown" : (d.consent === true || d.consent === "yes" ? "Yes" : "")
   };
+  var isPhoneOnly = PHONE_ONLY_SOURCES.indexOf(source) >= 0;
 
   if (!lead.phone && !lead.email) return { error: "Please enter a phone number or an email." };
   if (lead.phone && !/^[6-9][0-9]{9}$/.test(lead.phone)) return { error: "Please enter a valid 10-digit mobile number." };
   if (lead.whatsapp && !/^[6-9][0-9]{9}$/.test(lead.whatsapp)) return { error: "Please enter a valid 10-digit WhatsApp number." };
   if (lead.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) return { error: "Please enter a valid email." };
-  if (source !== "JOIN_FREE" && !lead.name) return { error: "Please enter your name." };
-  if (source !== "JOIN_FREE" && !lead.consent) return { error: "Please tick the box to agree to be contacted." };
-  if (source === "JOIN_FREE" && !lead.phone) return { error: "Please enter a valid 10-digit mobile number." };
+  if (!isPhoneOnly && !lead.name) return { error: "Please enter your name." };
+  if (!isPhoneOnly && !lead.consent) return { error: "Please tick the box to agree to be contacted." };
+  if (isPhoneOnly && !lead.phone) return { error: "Please enter a valid 10-digit mobile number." };
   if ((source === "SCHOLARSHIP" || source === "REGISTER") && (!lead.phone || !lead.email)) {
     return { error: "Please enter both your mobile number and email." };
   }
