@@ -4,7 +4,7 @@
  * Every website form posts here and each valid submission becomes one row.
  */
 
-var NOTIFY_EMAIL = ""; // optional: e.g. "sales@stockdealacademy.com" to get an email per lead. Leave "" for none.
+var NOTIFY_EMAIL = "stockdeal20@gmail.com"; // optional: e.g. "sales@stockdealacademy.com" to get an email per lead. Leave "" for none.
 var SHEET_NAME = "Leads";
 var HEADERS = [
   "Timestamp", "Source", "Name", "Phone", "WhatsApp", "Email", "City",
@@ -63,7 +63,7 @@ function validate_(d) {
     city: clean_(d.city, 80),
     interest: clean_(d.interest, 80),
     bestTime: clean_(d.bestTime, 40),
-    message: clean_(d.message, 1500),
+    message: cleanMultiline_(d.message, 1500),
     page: clean_(d.page, 100),
     consent: source === "JOIN_FREE" ? "Notice shown" : (d.consent === true || d.consent === "yes" ? "Yes" : "")
   };
@@ -82,8 +82,17 @@ function validate_(d) {
   return lead;
 }
 
+// Strips control characters (newlines included) so a field can't break out of its
+// single-line context, e.g. injecting extra lines into the notification email's subject.
 function clean_(v, max) {
-  return typeof v === "string" ? v.trim().slice(0, max) : "";
+  if (typeof v !== "string") return "";
+  return v.replace(/[\r\n\t\x00-\x1F\x7F]+/g, " ").trim().slice(0, max);
+}
+
+// Same idea, but keeps single newlines for free-text fields like the contact message.
+function cleanMultiline_(v, max) {
+  if (typeof v !== "string") return "";
+  return v.replace(/\r\n?/g, "\n").replace(/[\t\x00-\x09\x0B-\x1F\x7F]+/g, " ").replace(/\n{3,}/g, "\n\n").trim().slice(0, max);
 }
 
 // Accepts "98765 43210", "+91 98765-43210", "919876543210" and returns 10 digits.
